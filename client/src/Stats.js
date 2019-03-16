@@ -8,8 +8,6 @@ export default class Stats extends React.Component {
     render() {
         return(
             <div>
-                <TopicCloud />
-                <PieChart />
                 <BarChart />
             </div>
         )
