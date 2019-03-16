@@ -1,10 +1,11 @@
+import os
 import argparse
 import textrazor
 import urllib.parse as url_parser
 from pymongo import MongoClient
 
-DB_URI = "DB_URI"
-TR_KEY = "TR_KEY"
+DB_URI = os.environ.get("MONGODB_URI") or "mongodb://localhost/meta"
+TR_KEY = os.environ.get("TEXTRAZOR_KEY")
 
 class MyParserFormatter(argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter):
     pass
@@ -24,10 +25,6 @@ def post_data(uri, json_obj):
 
 def main():
     keys = {}
-    with open("./tokens.txt") as f:
-        for l in f:
-            k, v = l.split(" ")
-            keys[k] = v.strip('\n')
     db_uri = keys[DB_URI]
     textrazor.api_key = keys[TR_KEY]
 
