@@ -61,7 +61,16 @@ const OPTIONS = {
 }
 
 class BarChart extends React.Component {
-    
+    componentDidMount() {
+        let username = sessionStorage.getItem('username');
+        console.log(username.toString());
+        fetch(`/api/v1/stats/progress?username=${username.toString()}`)
+            .then(res => res.json())
+            .then(response => {
+                console.log(response);
+            })
+    }
+
     render() {
         return (
             <div>
