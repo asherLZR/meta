@@ -53,13 +53,16 @@ class TopicProgressBarChart extends React.Component {
                         suggestedMin: 0,
                     }
                 }]
-            }
+            },
+            maintainAspectRatio: false,
         }
         return (
             <div>
                 <Bar
                     data={this.state.chartData}
                     options={chartOptions}
+                    width={500}
+                    height={500}
                 />
             </div>
         );
