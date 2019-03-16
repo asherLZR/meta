@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { Row, Input, Icon, Button, Card, Col } from 'react-materialize'
 import AuthService from './AuthService.js';
@@ -104,26 +104,30 @@ export default class LogIn extends React.Component {
                         </div>
                     </Row>
                 </form>
-
+                <Row>
+                    <Col s={4}></Col>
+                    <Col s={4}><p>Don't have a login? <Link to='/signup'>Sign Up</Link></p></Col>
+                    <Col s={4}></Col>
+                </Row>
                 <div className="box"></div>
             
                     <div className="container">
                         <div className="vert-wrapper">
                         <center><img src="https://semantic-ui.com/images/avatar2/large/matthew.png" alt="W3Schools.com"></img>
                             <h5>SAVE ARTICLES</h5>
-                            <div class="b">hello my name is bob and this is some cool text</div>
+                            <div className="b">hello my name is bob and this is some cool text</div>
                             </center>
                         </div>
                         <div className="vert-wrapper">
                         <center><img src="https://semantic-ui.com/images/avatar2/large/matthew.png" alt="W3Schools.com"></img>
                             <h5>ANALYSE</h5>
-                            <div class="b">hello my name is bob and this is some cool text</div>
+                            <div className="b">hello my name is bob and this is some cool text</div>
                             </center>
                         </div>
                         <div className="vert-wrapper">
                             <center><img src="https://semantic-ui.com/images/avatar2/large/matthew.png" alt="W3Schools.com"></img>
                             <h5>SET GOALS</h5>
-                            <div class="b">hello my name is bob and this is some cool text</div>
+                            <div className="b">hello my name is bob and this is some cool text</div>
                             </center>
                         </div>
                     </div>
