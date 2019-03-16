@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { Row, Input, Icon, Button } from 'react-materialize'
 
@@ -8,7 +9,9 @@ export default class SignUp extends React.Component {
         this.state = {
             username: '',
             password: '',
-            signUpError: '',
+            successfulLogIn: false,
+            signUpError: false,
+            errorMessage: '',
         };
     };
     handleUsernameChange = (e) => {
@@ -27,7 +30,21 @@ export default class SignUp extends React.Component {
         };
         fetch('/api/v1/account/signup', requestOptions)
             .then(res => res.json())
-            .then(response => { console.log(JSON.stringify(response))})
+            .then(response => { 
+                console.log(response);
+                if(response.success) {
+                    this.setState({
+                        successfulLogIn: true,
+                        signUpError: false,
+                    });
+                } else {
+                    this.setState({
+                        successfulLogIn: false,
+                        signUpError: true,
+                        errorMessage: response.message,
+                    });
+                }
+            })
             .catch(error => {
                 this.setState({signUpError: error});
                 console.error(`Error: ${error}`)
@@ -35,9 +52,21 @@ export default class SignUp extends React.Component {
     }
 
     render() {
+        // Display error message
+        let errorMessageComponent = '';
+        if (this.state.signUpError) {
+            errorMessageComponent = <p>{this.state.errorMessage}</p>
+        } else {
+            errorMessageComponent = '';
+        }
+        // Redirect login
+        if (this.state.successfulLogIn) {
+            return <Redirect to='/' />
+        }
         return(
             <div>
                 <h1>Sign Up</h1>
+                {errorMessageComponent}
                 <form className='signUpForm'
                     onSubmit={ e=> {
                         e.preventDefault();
