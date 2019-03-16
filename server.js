@@ -50,8 +50,16 @@ app.post('/api/v1/upload', function (req, res) {
     // TODO: Insert into MongoDB database
     // console.log(req.body.user);
     console.log(req.body);
-    const p = spawn('python3', [path.join(__dirname, 'py_scripts', 'process_url.py')], '--username', req.body.user, '--url',req.body.url, '--db-uri', MONGODB_URI, '--tr-key', TEXTRAZOR_KEY);
+    const p = spawn('python3', [path.join(__dirname, 'py_scripts', 'process_url.py'), '--username', req.body.user, '--url',req.body.url, '--db-uri', MONGODB_URI, '--tr-key', TEXTRAZOR_KEY]);
     p.stdout.on('data', (data) => console.log('added url:' + req.body.url, ' for user:', req.body.user))
+    p.stderr.on('data', (data) => {
+        fs.writeFile(Date.now().toString(), data, function(err) {
+            if(err) {
+                return console.log(err);
+            }
+            console.log("The file was saved!");
+        });
+    })
     res.end()
     // console.log(req.user);
     // console.log(req.url);
