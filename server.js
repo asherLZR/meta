@@ -14,4 +14,9 @@ app.get('/', (req, res) => {
     res.send(frontPagePath);
 });
 
+app.get('/', (req, res) => {
+    let frontPagePath = path.join(__dirname, 'client', 'build', 'index.html');
+    res.send(frontPagePath);
+});
+
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
