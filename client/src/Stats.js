@@ -1,14 +1,14 @@
 import React from 'react';
 import PieChart from './components/charts/PieChart'
 import BarChart from'./components/charts/BarChart'
-/*
-    For now, the about me page will be the home page
-*/
+import TopicCloud from'./components/charts/TopicCloud'
+
+
 export default class Stats extends React.Component {
     render() {
         return(
             <div>
-                <p>Stats</p>
+                <TopicCloud />
                 <PieChart />
                 <BarChart />
             </div>
