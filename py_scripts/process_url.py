@@ -4,7 +4,7 @@ import textrazor
 import urllib.parse as url_parser
 from pymongo import MongoClient
 
-DB_URI = os.environ.get("MONGODB_URI") or "mongodb://localhost/meta"
+DB_URI = os.environ.get("MONGODB_URI")
 TR_KEY = os.environ.get("TEXTRAZOR_KEY")
 
 class MyParserFormatter(argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter):
@@ -24,10 +24,8 @@ def post_data(uri, json_obj):
     post_id = articles_collection.insert_one(json_obj).inserted_id
 
 def main():
-    keys = {}
-    db_uri = keys[DB_URI]
-    textrazor.api_key = keys[TR_KEY]
-
+    db_uri = DB_URI
+    textrazor.api_key = TR_KEY
     p = init_parser()
     args = p.parse_args()
 
