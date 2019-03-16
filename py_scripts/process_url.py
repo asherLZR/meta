@@ -1,10 +1,11 @@
+import os
 import argparse
 import textrazor
 import urllib.parse as url_parser
 from pymongo import MongoClient
 
-DB_URI = "DB_URI"
-TR_KEY = "TR_KEY"
+DB_URI = os.environ.get("MONGODB_URI")
+TR_KEY = os.environ.get("TEXTRAZOR_KEY")
 
 class MyParserFormatter(argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter):
     pass
@@ -12,8 +13,10 @@ class MyParserFormatter(argparse.RawTextHelpFormatter, argparse.ArgumentDefaults
 
 def init_parser():
     parser = argparse.ArgumentParser(description='Returns ', formatter_class=MyParserFormatter)
-    parser.add_argument('url', type=str, help='URL collected for analysis')
-    parser.add_argument('username', type=str, help='Username of account')
+    parser.add_argument('--url', type=str, help='URL collected for analysis')
+    parser.add_argument('--username', type=str, help='Username of account')
+    parser.add_argument('--db-uri')
+    parser.add_argument('--tr-key')
     return parser
 
 def post_data(uri, json_obj):
@@ -23,16 +26,10 @@ def post_data(uri, json_obj):
     post_id = articles_collection.insert_one(json_obj).inserted_id
 
 def main():
-    keys = {}
-    with open("./tokens.txt") as f:
-        for l in f:
-            k, v = l.split(" ")
-            keys[k] = v.strip('\n')
-    db_uri = keys[DB_URI]
-    textrazor.api_key = keys[TR_KEY]
-
     p = init_parser()
     args = p.parse_args()
+    db_uri = args.db_uri
+    textrazor.api_key = args.tr_key
 
     meta_extract = MetaExtract(args.url, args.username).build_json()
     post_data(db_uri, meta_extract)
