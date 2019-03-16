@@ -46,7 +46,7 @@ app.use( (req, res, next) => {
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(new LocalStrategy(
+passport.use(new LocalStrategy({session: false},
     function(username, password, done) {
         User.findOne({username: username}, (err, user) => {
             if (err) { return done(err); }
@@ -168,11 +168,11 @@ app.post('/api/v1/account/signup', function(req, res) {
 });
 
 app.post('/api/v1/login', passport.authenticate('local'), function(req, res) {
-    console.log(req.user)
     let userInfo = {
         username: req.user.username,
+        session: req.session,
     }
-    res.redirect('/');
+    res.send(userInfo);
 });
 
 app.get('/logout', function(req, res){

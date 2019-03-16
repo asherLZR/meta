@@ -1,5 +1,6 @@
 const AuthService = {
-    isAuthenticated: false,
+
+    isAuthenticated: sessionStorage.getItem('session') !== null,
     authenticate(cb) {
       this.isAuthenticated = true
       setTimeout(cb, 100)

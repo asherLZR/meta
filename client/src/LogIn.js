@@ -35,12 +35,17 @@ export default class LogIn extends React.Component {
         };
         fetch('/api/v1/login', requestOptions)
             .then(response => { 
-                console.log(response)
+                // TODO: Store session key into browser storage
                 if (response.status === 200) {
-                    AuthService.authenticate(() => {
-                        this.setState({ successfulLogIn: true });
-                        console.log("Successful sign in");
-                    });
+                    response.json()
+                        .then(response => {
+                            AuthService.authenticate(() => {
+                                sessionStorage.setItem('session', JSON.stringify(response.session))
+                                sessionStorage.setItem('username', JSON.stringify(response.username))
+                                this.setState({ successfulLogIn: true });
+                                console.log("Successful sign in");
+                            });
+                        })
                 } else if (response.status === 401) {
                     console.log(response);
                     this.setState({
