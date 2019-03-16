@@ -40,10 +40,15 @@ app.post('/api/v1/upload', function (req, res) {
 
 app.get('/api/v1/stats/progress', function (req, res) {
     res.sendFile(path.join(__dirname, 'dummy_data', 'progress.json'))
-})
+});
 
 app.get('/api/v1/stats/goals', function (req, res) {
     res.sendFile(path.join(__dirname, 'dummy_data', 'goals.json'))
-})
+});
+
+app.post('/api/v1/login', function (req, res) {
+    res.status(200);
+});
+
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
