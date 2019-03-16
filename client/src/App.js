@@ -8,6 +8,7 @@ import './App.css';
 import Home from './Home.js';
 import Stats from './Stats.js';
 import LogIn from './LogIn.js';
+import SignUp from './SignUp.js';
 
 class App extends Component {
   render() {
@@ -16,11 +17,13 @@ class App extends Component {
         <Navbar brand='meta' right>
           <li><NavLink to='/'>Home</NavLink></li>
           <li><NavLink to='/login'>Log In</NavLink></li>
+          <li><NavLink to='/signup'>Sign Up</NavLink></li>
           <li><NavLink to='/stats'>Stats</NavLink></li>
         </Navbar>
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route path='/login' component={LogIn}/>
+          <Route path='/signup' component={SignUp}/>
           <Route path='/stats' component={Stats}/>
         </Switch>
         <Footer copyrights="Copyright © 2019 Meta"
