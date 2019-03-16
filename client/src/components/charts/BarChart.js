@@ -19,8 +19,8 @@ const PROGRESS = {
 }
 
 // TODO: will create color constants file
-const COLORS = ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"];
-const COLORS2 = ["#c45850", "#3e95cd","#8e5ea2","#3cba9f","#e8c3b9"];
+const COLORS = ["#6ab04c", "#6ab04c","#6ab04c","#6ab04c","#6ab04c"];
+const COLORS2 = ["#eb4d4b", "#eb4d4b","#eb4d4b","#eb4d4b","#eb4d4b"];
 
 // build data and options objects for chart js
 const DATA =  {
@@ -38,7 +38,7 @@ const DATA =  {
         }
     ]
 };
-
+console.log(DATA);
 const OPTIONS = {
     title: {
         display: true,
@@ -61,13 +61,35 @@ const OPTIONS = {
 }
 
 class BarChart extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            chartData: {},
+
+        };
+    };
+
     componentDidMount() {
         let username = sessionStorage.getItem('username');
         console.log(username.toString());
-        fetch(`/api/v1/stats/progress?username=${username.toString()}`)
+        let requestOptions = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        }
+        fetch(`/api/v1/stats/progress?username=${username.toString()}`, requestOptions)
             .then(res => res.json())
             .then(response => {
                 console.log(response);
+                let labelArray = Object.keys(response.category);
+                let dataArray = Object.values(response.category);
+                let chartData = {
+                    labels: labelArray,
+                    datasets: [{
+                        data: dataArray,
+                        backgroundColor: "#6ab04c"
+                    }]
+                };
+                this.setState({ chartData: chartData });
             })
     }
 
@@ -75,7 +97,7 @@ class BarChart extends React.Component {
         return (
             <div>
                 <Bar
-                    data={DATA} 
+                    data={this.state.chartData} 
                     options={OPTIONS}
                 />
             </div>
