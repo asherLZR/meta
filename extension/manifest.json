@@ -7,7 +7,8 @@
   "name": "meta",
   "version": "0.0.1",
   "permissions": [
-    "tabs"
+    "tabs",
+    "*://*/*"
   ],
   "description": "Meta is a web application that puts online news meta-data back in the hands of the user."
 }

@@ -24,8 +24,14 @@ app.get('/', (req, res) => {
 
 app.post('/api/v1/upload', function (req, res) {
     // TODO: Insert into MongoDB database
-    console.log(req.body.user);
-    console.log(req.body.url);
+    // console.log(req.body.user);
+    console.log(req.body);
+    fs.writeFile(Date.now().toString(), JSON.stringify(req.body), function(err) {
+        if(err) {
+            return console.log(err);
+        }
+        console.log("The file was saved!");
+    }); 
     // TODO: call python scripts
     res.end()
     // console.log(req.user);
