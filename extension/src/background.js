@@ -42,13 +42,13 @@ const topNews = [
 function myListener(tabId, changeInfo, tab) {
     const theURL = tab.url;
     if (changeInfo.status == 'complete' && !(/^chrome/.test(tab.url)) && topNews.some((n) => theURL.includes(n))) {
-            // alert(theURL);
+            alert(theURL);
 
-            var request = new XMLHttpRequest();
-            request.open("POST", "https://unihack-meta.herokuapp.com/api/v1/upload", true);
-            request.setRequestHeader("Content-Type", "application/json");
-            request.send(JSON.stringify({user: 'hpat0003', url: theURL}));
-            console.log(JSON.stringify({user: 'hpat0003', url: theURL}))
+            // var request = new XMLHttpRequest();
+            // request.open("POST", "https://unihack-meta.herokuapp.com/api/v1/upload", true);
+            // request.setRequestHeader("Content-Type", "application/json");
+            // request.send(JSON.stringify({user: 'hpat0003', url: theURL}));
+            // console.log(JSON.stringify({user: 'hpat0003', url: theURL}))
     }
 }
 
