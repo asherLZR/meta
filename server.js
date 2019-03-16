@@ -120,6 +120,7 @@ app.get('/api/v1/stats/goals', function (req, res) {
     p.stdout.on('data', (data)=>res.send(data));
 });
 
+
 app.post('/api/v1/account/signup', function(req, res) {
     let username = req.body.username;
     let password = req.body.password;
