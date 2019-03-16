@@ -1,9 +1,9 @@
 import argparse
 from pymongo import MongoClient
 import json
+import os
 
-DB_URI = "DB_URI"
-TR_KEY = "TR_KEY"
+DB_URI = os.environ.get("MONGODB_URI")
 TAGS = ["category", "source", "topics"]
 
 class MyParserFormatter(argparse.RawTextHelpFormatter, argparse.ArgumentDefaultsHelpFormatter):
@@ -12,7 +12,7 @@ class MyParserFormatter(argparse.RawTextHelpFormatter, argparse.ArgumentDefaults
 
 def init_parser():
     parser = argparse.ArgumentParser(description='Returns ', formatter_class=MyParserFormatter)
-    parser.add_argument('username', type=str, help='Username of account')
+    parser.add_argument('--username', required=True, type=str, help='Username of account')
     return parser
 
 def get_data(uri, username):
@@ -46,12 +46,7 @@ def add_val(dic, val):
         dic[val] = 1
 
 def main():
-    keys = {}
-    with open("./tokens.txt") as f:
-        for l in f:
-            k, v = l.split(" ")
-            keys[k] = v.strip('\n')
-    db_uri = keys[DB_URI]
+    db_uri = DB_URI
 
     p = init_parser()
     args = p.parse_args()
