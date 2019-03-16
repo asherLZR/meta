@@ -3,8 +3,12 @@
     "default_icon": "icons/icon48.png"
   },
   "background": {
-    "scripts": ["./src/background.js"],
+    "scripts": ["/src/background.js"],
     "persistent": true
+  },
+  "options_ui": {
+    "page": "/src/options.html",
+    "open_in_tab": false
   },
   "manifest_version": 2,
   "name": "meta",
