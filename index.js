@@ -1,10 +1,17 @@
-const fs = require('fs')
-const express = require('express')
-const PORT = process.env.PORT || 5000
+const fs = require('fs');
+const path = require('path');
+const express = require('express');
 
-const app = express()
+const PORT = process.env.PORT || 5000;
+const app = express();
 
+// Host static files (Front-end files)
+app.use(express.static(path.join(__dirname,'client','build')));
 
+/* ENDPOINTS */
+app.get('/', (req, res) => {
+    let frontPagePath = path.join(__dirname, 'client', 'build', 'index.html');
+    res.send(frontPagePath);
+});
 
-app.get('/', (req, res) => res.send('Hillo wurld!'))
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
