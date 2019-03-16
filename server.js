@@ -112,8 +112,6 @@ app.post('/api/v1/upload', function (req, res) {
 app.get('/api/v1/stats/progress', function (req, res) {
     const p = spawn('python3', [path.join(__dirname, 'py_scripts', 'aggregator.py'), '--username', req.query.user]);
     p.stdout.on('data', (data)=>res.send(data));
-    res.end();
-    // res.sendFile(path.join(__dirname, 'dummy_data', 'progress.json'))
 });
 
 app.get('/api/v1/stats/goals', function (req, res) {
