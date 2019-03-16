@@ -1,0 +1,2 @@
+DB_URI mongodb://metaAdmin:idrink9coffees@ds217351.mlab.com:17351/heroku_l142m8jk
+TR_KEY 2eb915cdbcb4b71b8b35c2e0bcd6b797546daa67305feaf545e0bf48

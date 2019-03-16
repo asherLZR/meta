@@ -1,0 +1,33 @@
+.box {
+  padding: 50px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.vert-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.pad {
+    padding: 10px;
+  }
+
+div.b {
+    width: 200px;
+    word-wrap: break-word;
+  }
+
+img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 50%
+}
