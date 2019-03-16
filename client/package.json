@@ -8,6 +8,8 @@
     "react-chartjs": "^1.2.0",
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.8.4",
+    "react-materialize": "^2.6.0",
+    "react-router-dom": "^4.4.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {

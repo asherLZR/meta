@@ -1,0 +1,13 @@
+{
+  
+  "browser_action": {
+    "default_popup": "src/popup.html"
+  },
+  "manifest_version": 2,
+  "name": "meta",
+  "version": "0.0.1",
+  "permissions": [
+    "tabs"
+  ],
+  "description": "Meta is a web application that puts online news meta-data back in the hands of the user."
+}
