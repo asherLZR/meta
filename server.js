@@ -123,8 +123,6 @@ app.get('/api/v1/stats/goals', function (req, res) {
 app.post('/api/v1/account/signup', function(req, res) {
     let username = req.body.username;
     let password = req.body.password;
-    console.log(username);
-    console.log(password);
     if (!username) {
         return res.send({
           success: false,
