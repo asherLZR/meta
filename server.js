@@ -110,17 +110,19 @@ app.post('/api/v1/upload', function (req, res) {
   });
 
 app.get('/api/v1/stats/progress', function (req, res) {
-    // console.log(req.query.username);
+    console.log(`Querying progress for ${req.query.username}`);
     const p = spawn('python3', [path.join(__dirname, 'py_scripts', 'aggregator.py'), '--username', req.query.username]);
     p.stdout.on('data', (data)=>res.send(data));
 });
 
 app.get('/api/v1/stats/goals', function (req, res) {
+    console.log(`Querying goals for ${req.query.username}`);
     const p = spawn('python3', [path.join(__dirname, 'py_scripts', 'goals.py'), '--username', req.query.username]);
     p.stdout.on('data', (data)=>res.send(data));
 });
 
 app.get('/api/v1/stats/collection', function (req, res) {
+    console.log(`Querying collection for ${req.query.username}`);
     const p = spawn('python3', [path.join(__dirname, 'py_scripts', 'collection.py'), '--username', req.query.username]);
     p.stdout.on('data', (data)=>res.send(data));
 });
