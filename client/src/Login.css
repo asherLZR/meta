@@ -25,7 +25,7 @@ div.b {
     word-wrap: break-word;
   }
 
-img {
+.img-circle {
     width: 120px;
     height: 120px;
     object-fit: contain;

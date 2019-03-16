@@ -28,9 +28,9 @@ class App extends Component {
   render() {
     return (
       <div className="body">
-        <Navbar brand='meta' right>
-          <li><NavLink to='/'>Home</NavLink></li>
-          <li><NavLink to='/stats'>Stats</NavLink></li>
+        <Navbar className="navbar" brand={<img className="img-logo" src='https://i.imgur.com/QA27FgF.png'></img>} right>
+          <li><NavLink className="navbar" to='/'>Home</NavLink></li>
+          <li><NavLink className="navbar" to='/stats'>Stats</NavLink></li>
         </Navbar>
         <Switch>
           <SecretRoute exact path='/' component={Home}/>
@@ -40,19 +40,19 @@ class App extends Component {
         </Switch>
         <Footer copyrights="Copyright © 2019 Meta"
           moreLinks={
-            <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <a className="black-text right" href="#!">More Links</a>
           }
           links={
             <ul>
-              <li><a className="grey-text text-lighten-3" href="#!">About</a></li>
-              <li><a className="grey-text text-lighten-3" href="#!">Privacy</a></li>
-              <li><a className="grey-text text-lighten-3" href="#!">Contact Us</a></li>
+              <li><a className="black-text" href="#!">About</a></li>
+              <li><a className="black-text" href="#!">Privacy</a></li>
+              <li><a className="black-text" href="#!">Contact Us</a></li>
             </ul>
           }
           className='footer'
         >
-            <h5 className="white-text">Meta</h5>
-            <p className="grey-text text-lighten-4">All trademarks are owned by their respective owners.
+            <h6 className="black-text">Meta</h6>
+            <p className="black-text">All trademarks are owned by their respective owners.
             Meta is an independent community website which has no association with nor endorsement by the respective trademark owners..</p>
         </Footer>;
       </div>
