@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/meta"
+const TEXTRAZOR_KEY = process.env.TEXTRAZOR_KEY
 const app = express();
 
 const User = require('./server/models/User');
@@ -49,7 +50,7 @@ app.post('/api/v1/upload', function (req, res) {
     // TODO: Insert into MongoDB database
     // console.log(req.body.user);
     console.log(req.body);
-    const p = spawn('python3', [path.join(__dirname, 'py_scripts', 'process_url.py')], req.body.url, req.body.user);
+    const p = spawn('python3', [path.join(__dirname, 'py_scripts', 'process_url.py')], '--username', req.body.user, '--url',req.body.url, '--db-uri', MONGODB_URI, '--tr-key', TEXTRAZOR_KEY);
     p.stdout.on('data', (data) => console.log('added url:' + req.body.url, ' for user:', req.body.user))
     res.end()
     // console.log(req.user);
