@@ -40,6 +40,10 @@ const topNews = [
   ]
 
 function myListener(tabId, changeInfo, tab) {
+
+    if (sessionStorage.getItem('username') == null) {
+      return
+    }
     const theURL = tab.url;
     if (changeInfo.status == 'complete' && !(/^chrome/.test(tab.url)) && topNews.some((n) => theURL.includes(n))) {
             // alert(theURL);
@@ -47,8 +51,8 @@ function myListener(tabId, changeInfo, tab) {
             var request = new XMLHttpRequest();
             request.open("POST", "https://unihack-meta.herokuapp.com/api/v1/upload", true);
             request.setRequestHeader("Content-Type", "application/json");
-            request.send(JSON.stringify({user: 'hpat0003', url: theURL}));
-            console.log(JSON.stringify({user: 'hpat0003', url: theURL}))
+            request.send(JSON.stringify({user: sessionStorage.getItem('username'), url: theURL}));
+            console.log(JSON.stringify({user: sessionStorage.getItem('username'), url: theURL}))
     }
 }
 

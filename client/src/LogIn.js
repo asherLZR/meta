@@ -119,20 +119,20 @@ export default class LogIn extends React.Component {
                     <div className="container">
                         <div className="vert-wrapper">
                         <center><img className="img-circle" src="https://semantic-ui.com/images/avatar2/large/matthew.png" alt="W3Schools.com"></img>
-                            <h5>SAVE ARTICLES</h5>
-                            <div className="b">hello my name is bob and this is some cool text</div>
+                            <h5>SAVE</h5>
+                            <div className="b">Save articles on the go to add to your dashboard and read later.</div>
                             </center>
                         </div>
                         <div className="vert-wrapper">
                         <center><img className="img-circle" src="https://semantic-ui.com/images/avatar2/large/matthew.png" alt="W3Schools.com"></img>
                             <h5>ANALYSE</h5>
-                            <div className="b">hello my name is bob and this is some cool text</div>
+                            <div className="b">Analyse your statistics from an unbiased perspective, reflect and adjust.</div>
                             </center>
                         </div>
                         <div className="vert-wrapper">
                             <center><img className="img-circle" src="https://semantic-ui.com/images/avatar2/large/matthew.png" alt="W3Schools.com"></img>
                             <h5>SET GOALS</h5>
-                            <div className="b">hello my name is bob and this is some cool text</div>
+                            <div className="b">Set your own personal goals to improve and diversify the news you consume.</div>
                             </center>
                         </div>
                     </div>
