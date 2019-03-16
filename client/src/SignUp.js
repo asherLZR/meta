@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-import { Row, Input, Icon, Button } from 'react-materialize'
+import { Col, Row, Input, Icon, Button } from 'react-materialize'
 
 export default class SignUp extends React.Component {
     constructor(props) {
@@ -65,7 +65,13 @@ export default class SignUp extends React.Component {
         }
         return(
             <div>
-                <h1>Sign Up</h1>
+                <Row>
+                    <div>
+                        <Col s={4}></Col>
+                        <Col s={4}><h5>Sign Up</h5></Col>
+                        <Col s={4}></Col>
+                    </div>
+                </Row>
                 {errorMessageComponent}
                 <form className='signUpForm'
                     onSubmit={ e=> {
@@ -73,10 +79,16 @@ export default class SignUp extends React.Component {
                         this.handleSubmit();
                     }}>
                     <Row>
-                        <Input placeholder='Username' s={12} label='Username' onChange={this.handleUsernameChange}><Icon medium>person</Icon></Input>
-                        <Input type='password' label="Password" s={12} onChange={this.handlePasswordChange}><Icon medium>lock</Icon></Input>
-                        <Button waves='light'>Submit</Button>
+                        <Col s={4}></Col>
+                        <Input placeholder='Username' s={4} label='Username' onChange={this.handleUsernameChange}><Icon medium>person</Icon></Input>
+                        <Col s={4}></Col>
                     </Row>
+                    <Row>
+                        <Col s={4}></Col>
+                        <Input type='password' label="Password" s={4} onChange={this.handlePasswordChange}><Icon medium>lock</Icon></Input>
+                        <Col s={4}></Col>
+                    </Row>
+                        <center><Button waves='light'>Submit</Button></center>
                 </form>
 
             </div>
