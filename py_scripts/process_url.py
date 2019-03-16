@@ -24,7 +24,7 @@ def post_data(uri, json_obj):
 
 def main():
     keys = {}
-    with open("tokens.txt") as f:
+    with open("./tokens.txt") as f:
         for l in f:
             k, v = l.split(" ")
             keys[k] = v.strip('\n')
