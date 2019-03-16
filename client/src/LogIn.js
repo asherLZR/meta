@@ -41,7 +41,7 @@ export default class LogIn extends React.Component {
                         .then(response => {
                             AuthService.authenticate(() => {
                                 sessionStorage.setItem('session', JSON.stringify(response.session))
-                                sessionStorage.setItem('username', JSON.stringify(response.username))
+                                sessionStorage.setItem('username', response.username)
                                 this.setState({ successfulLogIn: true });
                                 console.log("Successful sign in");
                             });
