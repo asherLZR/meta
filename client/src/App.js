@@ -8,7 +8,6 @@ import './App.css';
 import Home from './Home.js';
 import Stats from './Stats.js';
 import LogIn from './LogIn.js';
-import LogOut from './LogOut.js';
 import SignUp from './SignUp.js';
 
 import AuthService from './AuthService.js';

@@ -1,13 +1,20 @@
 import React from 'react';
+import { Row, Col } from 'react-materialize'
 
-/*
-    For now, the about me page will be the home page
-*/
+import LogOut from './LogOut.js';
+
 export default class Home extends React.Component {
     render() {
         return(
             <div>
-                <p>Home</p>
+                <Row>
+                    <Col s={4}/>
+                    <Col s={4}><h5>Home</h5></Col>
+                    <Col s={4}/>
+                </Row>
+                <Row>
+                    <LogOut />
+                </Row>
             </div>
         )
     }
