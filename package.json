@@ -17,6 +17,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }
