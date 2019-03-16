@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const express = require('express');
 const session = require('express-session');
 const mongoose = require("mongoose");
@@ -41,8 +43,49 @@ app.use( (req, res, next) => {
     return next();
 });
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.findOne({username: username}, (err, user) => {
+            if (err) { return done(err); }
+            
+            if (!user) {
+                return done(null, false, { message: 'Incorrect username'});
+            }
+
+            if (!user.validPassword(password)) {
+                return done(null, false, { message: 'Incorrect password'});
+            }
+            return done(null, user);
+        });
+    }
+))
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+  });
+  
+  passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+      done(err, user);
+    });
+  });
+
+function loggedIn(req, res, next) {
+    console.log("Check if logged in")
+    if (req.user) {
+        console.log("signed in");
+        next();
+    } else {
+        console.log("not signed in");
+        res.redirect('/login');
+    }
+}
 /* ENDPOINTS */
-app.get('/', (req, res) => {
+app.get('/', loggedIn, (req, res) => {
+    console.log(req.user)
     let frontPagePath = path.join(__dirname, 'client', 'build', 'index.html');
     res.send(frontPagePath);
 });
@@ -128,17 +171,18 @@ app.post('/api/v1/account/signup', function(req, res) {
     });
 });
 
-app.post('/api/v1/login', function (req, res) {
-    console.log(req.body);
-    if (req.body.username == "") {
-        res.status(400).send("Missing username");
+app.post('/api/v1/login', passport.authenticate('local'), function(req, res) {
+    console.log(req.user)
+    let userInfo = {
+        username: req.user.username,
     }
-    if(req.body.password == "") {
-        res.status(400).send("Missing password");
-    }
-    req.session.username = req.body.username;
-    res.status(200);
+    res.redirect('/');
 });
+
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+  });
 
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`));

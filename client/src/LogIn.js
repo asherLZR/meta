@@ -1,6 +1,9 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { Row, Input, Icon, Button, Card, Col } from 'react-materialize'
+import AuthService from './AuthService.js';
+
 import './Login.css';
 
 export default class LogIn extends React.Component {
@@ -9,8 +12,12 @@ export default class LogIn extends React.Component {
         this.state = {
             username: '',
             password: '',
+            successfulLogIn: false,
+            logInError: false,
+            errorMessage: '',
         };
     };
+
     handleUsernameChange = (e) => {
         this.setState({ username: e.currentTarget.value });
     }
@@ -24,14 +31,46 @@ export default class LogIn extends React.Component {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {'Content-Type': 'application/json'},
+            redirect: 'follow',
         };
         fetch('/api/v1/login', requestOptions)
-            .then(res => res.json())
-            .then(response => { console.log(JSON.stringify(response))})
-            .catch(error => console.error(`Error: ${error}`));
+            .then(response => { 
+                console.log(response)
+                if (response.status === 200) {
+                    AuthService.authenticate(() => {
+                        this.setState({ successfulLogIn: true });
+                        console.log("Successful sign in");
+                    });
+                } else if (response.status === 401) {
+                    console.log(response);
+                    this.setState({
+                        logInError: true,
+                        errorMessage: "Incorrect Password"
+                    });
+                }
+            })
+            .catch(error => {
+                console.error(`Error: ${error}`);
+                this.setState({logInError: true});
+            });
     }
 
     render() {
+        // Display error message
+        let errorMessageComponent = '';
+        if (this.state.logInError) {
+            errorMessageComponent = <p>{this.state.errorMessage}</p>
+        } else {
+            errorMessageComponent = '';
+        }
+
+        const { from } = this.props.location.state || { from: { pathname: "/" } };
+
+        // Redirect login
+        if (this.state.successfulLogIn) {
+            return <Redirect to={from} />
+        }
+
         return(
             <div>
                 
@@ -49,6 +88,7 @@ export default class LogIn extends React.Component {
                                 <Col s={4}><h5>LOG IN</h5></Col>
                                 <Col s={4}></Col>
                             </div>
+                            {errorMessageComponent}
                             <div>
                                 <Col s={4}></Col>
                                 <Input placeholder='Username' s={4} label='Username' onChange={this.handleUsernameChange}><Icon medium>person</Icon></Input>

@@ -8,6 +8,7 @@ export default class SignUp extends React.Component {
         this.state = {
             username: '',
             password: '',
+            signUpError: '',
         };
     };
     handleUsernameChange = (e) => {
@@ -27,7 +28,10 @@ export default class SignUp extends React.Component {
         fetch('/api/v1/account/signup', requestOptions)
             .then(res => res.json())
             .then(response => { console.log(JSON.stringify(response))})
-            .catch(error => console.error(`Error: ${error}`));
+            .catch(error => {
+                this.setState({signUpError: error});
+                console.error(`Error: ${error}`)
+            });
     }
 
     render() {
