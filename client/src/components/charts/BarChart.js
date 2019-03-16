@@ -1,13 +1,42 @@
 import React from 'react';
-import {HorizontalBar} from 'react-chartjs-2';
+import {Bar} from 'react-chartjs-2';
 
+// TODO: will use the data from the database
+const CATEGORIES = ["TECH", "BUSINESS", "POLITICS", "ENTERTAINMENT"];
+
+const GOALS = {
+    "TECH": 30,
+    "BUSINESS" : 10,
+    "POLITICS" : 20, 
+    "ENTERTAINMENT" : 5
+}
+
+const PROGRESS = {
+    "TECH": 20,
+    "BUSINESS" : 8,
+    "POLITICS" : 19, 
+    "ENTERTAINMENT" : 1
+}
+
+// TODO: will create color constants file
+const COLORS = ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"];
+const COLORS2 = ["#c45850", "#3e95cd","#8e5ea2","#3cba9f","#e8c3b9"];
+
+// build data and options objects for chart js
 const DATA =  {
-    labels: ["TECH", "BUSINESS", "POLITICS", "ENTERTAINMENT"],
-    datasets: [{
-        label: "PROGRESS",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-        data: [30, 15, 20, 5]
-    }]
+    labels: CATEGORIES,
+    datasets: [
+        {
+            label: "progress",
+            data: CATEGORIES.map(category => PROGRESS[category]),
+            backgroundColor: CATEGORIES.map((_, idx) => COLORS[idx])
+        },
+        {
+            label: "remaining",
+            data: CATEGORIES.map(category => GOALS[category]-PROGRESS[category]),
+            backgroundColor: CATEGORIES.map((_, idx) => COLORS2[idx])
+        }
+    ]
 };
 
 const OPTIONS = {
@@ -20,9 +49,12 @@ const OPTIONS = {
     },
     scales: {
         xAxes: [{
+            stacked: true
+        }],
+        yAxes: [{
+            stacked: true,
             ticks: {
                 suggestedMin: 0,
-                suggestedMax: 50
             }
         }]
     }
@@ -33,7 +65,7 @@ class BarChart extends React.Component {
     render() {
         return (
             <div>
-                <HorizontalBar
+                <Bar
                     data={DATA} 
                     options={OPTIONS}
                 />
