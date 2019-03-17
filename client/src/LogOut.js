@@ -20,10 +20,10 @@ export default class LogOut extends React.Component {
 
     render() {
         if (this.state.logOut) {
-            return <Redirect to='/' />
+            return <Redirect to='/login' />
         }
         return(
-            <Button waves='light' onClick={this.handleClick}>Log Out</Button>
+            <Button className={this.props.className} waves='light' onClick={this.handleClick}>Log Out</Button>
         )
     }
 }

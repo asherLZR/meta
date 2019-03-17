@@ -1,7 +1,5 @@
 import React from 'react';
-import { Collection, CollectionItem ,Chip} from 'react-materialize'
-
-import LogOut from './LogOut.js';
+import { Collection, CollectionItem , Chip, Row } from 'react-materialize'
 
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
@@ -16,6 +14,9 @@ class ArticleItem extends React.Component {
     }
 
     render() {
+        if (this.state.article.category.length == 0) {
+            return <CollectionItem />
+        }
         return <CollectionItem>
         <div>
             <h5>{this.state.article.category[0].replaceAll('\"','')}</h5>
@@ -33,11 +34,14 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
-        fetch('/api/v1/stats/collection?username=' + 'hdas')
+        let username = sessionStorage.getItem('username');
+        fetch('/api/v1/stats/collection?username=' + username)
             .then(res => res.json())
             .then(response => {
                 console.log(response);
-                this.setState({articleList: response});
+                if (response) {
+                    this.setState({articleList: response});
+                }
             })
             .catch(error => console.error(`Error: ${error}`));
     }

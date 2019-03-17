@@ -9,6 +9,7 @@ import Home from './Home.js';
 import Stats from './Stats.js';
 import LogIn from './LogIn.js';
 import SignUp from './SignUp.js';
+import Profile from './Profile.js';
 
 import AuthService from './AuthService.js';
 
@@ -30,11 +31,13 @@ class App extends Component {
         <Navbar className="navbar" brand={<img className="img-logo" src='https://i.imgur.com/QA27FgF.png'></img>} right>
           <li><NavLink className="navbar" to='/'>Home</NavLink></li>
           <li><NavLink className="navbar" to='/stats'>Stats</NavLink></li>
+          <li><NavLink className="navbar" to='/logout'>Profile</NavLink></li>
         </Navbar>
         <Switch>
           <SecretRoute exact path='/' component={Home}/>
           <Route path='/login' component={LogIn}/>
           <Route path='/signup' component={SignUp}/>
+          <SecretRoute path='/logout' component={Profile}/>
           <SecretRoute path='/stats' component={Stats}/>
         </Switch>
         <Footer copyrights="Copyright © 2019 Meta"
