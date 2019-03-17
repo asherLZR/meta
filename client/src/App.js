@@ -32,8 +32,8 @@ class App extends Component {
         <Navbar className="navbar" brand={<img className="img-logo" src='https://i.imgur.com/QA27FgF.png'></img>} right>
           <li><NavLink className="navbar" to='/'>Home</NavLink></li>
           <li><NavLink className="navbar" to='/stats'>Stats</NavLink></li>
-          <li><NavLink className="navbar" to='/logout'>Profile</NavLink></li>
           <li><NavLink className="navbar" to='/goals'>Goals</NavLink></li>
+          <li><NavLink className="navbar" to='/logout'>Profile</NavLink></li>
         </Navbar>
         <Switch>
           <SecretRoute exact path='/' component={Home}/>
