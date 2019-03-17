@@ -19,10 +19,21 @@ function validate() {
                 response.json()
                     .then(response => {
                         console.log(response)
+                        const user = JSON.stringify(response.username)
+                        
                         // AuthService.authenticate(() => {
-                            sessionStorage.setItem('session', JSON.stringify(response.session))
-                            sessionStorage.setItem('username', JSON.stringify(response.username))
+                            const formattedUser = (user.startsWith("\"") && user.endsWith("\"")? user.substring(1, user.length-1): user)
+                            chrome.storage.sync.set({'username': formattedUser, 'session': JSON.stringify(response.session)}, function() {
+                                console.log('username is set to ' + formattedUser);
+                                console.log('session set to ' + JSON.stringify(response.session))
+                            });
+                            
+                            // sessionStorage.setItem('session', JSON.stringify(response.session))
+                            // sessionStorage.setItem('username', (user.startsWith("\"") && user.endsWith("\"")? user.substring(1, user.length-1): user))
                             // this.setState({ successfulLogIn: true });
+                            chrome.storage.sync.get(['username'], function(result) {
+                                console.log('usernameee currently is ' + result.username);
+                              })
                             message.innerText = 'Successful sign in!'
                             console.log("Successful sign in");
                         // });

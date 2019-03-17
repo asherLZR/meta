@@ -40,19 +40,28 @@ const topNews = [
   ]
 
 function myListener(tabId, changeInfo, tab) {
-
-    if (sessionStorage.getItem('username') == null) {
-      return
-    }
+    console.log('listenerrr')
     const theURL = tab.url;
-    if (changeInfo.status == 'complete' && !(/^chrome/.test(tab.url)) && topNews.some((n) => theURL.includes(n))) {
+    console.log(theURL);
+    if ((changeInfo.status == 'complete') && (!(/^chrome/.test(tab.url))) && (topNews.some((n) => theURL.includes(n)))) {
             // alert(theURL);
-
-            var request = new XMLHttpRequest();
-            request.open("POST", "https://unihack-meta.herokuapp.com/api/v1/upload", true);
-            request.setRequestHeader("Content-Type", "application/json");
-            request.send(JSON.stringify({user: sessionStorage.getItem('username'), url: theURL}));
-            console.log(JSON.stringify({user: sessionStorage.getItem('username'), url: theURL}))
+            var username;
+            chrome.storage.sync.get(['username'], function(result) {
+              console.log('getting the username')
+              username = result.username;
+              console.log(result);
+              if (username == null) {
+                console.log('returning because null');
+                return;
+              }
+              console.log(username);
+              var request = new XMLHttpRequest();
+              request.open("POST", "https://unihack-meta.herokuapp.com/api/v1/upload", true);
+              request.setRequestHeader("Content-Type", "application/json");
+              request.send(JSON.stringify({'user': username, 'url': theURL}));
+              console.log(request)
+              console.log(JSON.stringify({user: username, url: theURL}))
+            })
     }
 }
 
