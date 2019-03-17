@@ -10,6 +10,7 @@ import Stats from './Stats.js';
 import LogIn from './LogIn.js';
 import SignUp from './SignUp.js';
 import Profile from './Profile.js';
+import Goals from './Goals.js';
 
 import AuthService from './AuthService.js';
 
@@ -32,6 +33,7 @@ class App extends Component {
           <li><NavLink className="navbar" to='/'>Home</NavLink></li>
           <li><NavLink className="navbar" to='/stats'>Stats</NavLink></li>
           <li><NavLink className="navbar" to='/logout'>Profile</NavLink></li>
+          <li><NavLink className="navbar" to='/goals'>Goals</NavLink></li>
         </Navbar>
         <Switch>
           <SecretRoute exact path='/' component={Home}/>
@@ -39,6 +41,7 @@ class App extends Component {
           <Route path='/signup' component={SignUp}/>
           <SecretRoute path='/logout' component={Profile}/>
           <SecretRoute path='/stats' component={Stats}/>
+          <SecretRoute path='/goals' component={Goals}/>
         </Switch>
         <Footer copyrights="Copyright © 2019 Meta"
           moreLinks={
