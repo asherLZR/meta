@@ -1,5 +1,7 @@
 import React from 'react';
 import { Collection, CollectionItem , Chip, Row } from 'react-materialize'
+import './Home.css';
+
 
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
@@ -18,11 +20,11 @@ class ArticleItem extends React.Component {
             return <CollectionItem />
         }
         return <CollectionItem>
-        <div>
+        <div className='articleItem'>
             <h5>{this.state.article.category[0].replaceAll('\"','')}</h5>
             <div>{".. " + this.state.article.article_snippet + " .."}</div>
             <div><Chip><img src='//logo.clearbit.com/abc.net.au' alt='News Icon'/>abcnews</Chip></div>
-            </div>
+        </div>
         </CollectionItem>;
     }
 }
